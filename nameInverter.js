@@ -1,36 +1,30 @@
-const nameInverter = function (name) {
-  // Return empty strin if name is empty
+const nameInverter = function(name) {
+  // Return empty string if name is empty
   if (name === ' ') {
     return ' ';
-  } 
-
-  const lastToFirst = function (array) {
-    return `${array[1]}, ${array[0]}`
+  }
+  
+  if (name === undefined) {
+    return "throw 'Error'";
   }
 
-  const findHonorific = function (array, wordCount) {
+  const lastToFirst = function(array) {
+    return `${array[1]}, ${array[0]}`;
+  };
+
+  const findHonorific = function(array, wordCount) {
     for (let i = 0; i < wordCount; i++) {
       let currentWord = array[i];
       if (currentWord[currentWord.length - 1] === '.') {
         let honorific = currentWord;
         return honorific;
+      } else {
+        return false;
       }
     }
-  }
+  };
 
-  const shiftHonrificToStart = function (array, honorific, wordCount) {
-    for (let i = 0; i < wordCount; i++) {
-      let currentWord = array[i];
-      if (currentWord === honorific) { 
-        const tempArr = array;
-        tempArr.splice(i, 1);
-        tempArr.unshift(honorific);
-        return tempArr.join(' ');
-      }
-    }
-  }
-
-  const removeWhitepaces = function (array) {
+  const removeWhitepaces = function(array) {
     let wordsNoSpaces = [];
     for (let word of array) {
       if (word.length !== 0) {
@@ -38,47 +32,55 @@ const nameInverter = function (name) {
       }
     }
     return wordsNoSpaces;
-  }
-  
+  };
 
-  // Split string into different names
-  let nameArray = name.split(' ');
+  const findLastName = function(array) {
+    for (let name of array) {
+      if (name[name.length - 1] === ',') {
+        return name;
+      } else {
+        return false;
+      }
+    }
+  };
 
-  // Remove whitespace from nameArray
-  let wordsNoSpaces = removeWhitepaces(nameArray);
-  let wordCount = wordsNoSpaces.length;
-  let honorific = findHonorific(wordsNoSpaces, wordCount);
-  console.log('wordsNoSpacesArray:', wordsNoSpaces);
-  console.log('word count:', wordCount);
-  console.log('honrific:', honorific);
-
-  // If only one name present
-  if (wordCount === 1) {
-    let singleName = wordsNoSpaces[0];
+  const singleName = function(array, honorific) {
+    let singleName = array[0];
     // Checks the last char for '.' If true that means name is an honorific
     if (singleName === honorific) {
       return ' ';
     }
     // Return single name with no leading or trailing spaces
     return singleName;
+  };
+  
+  // Split string into different names/honorifics
+  let nameArray = name.split(' ');
+
+  // Remove whitespace from nameArray
+  let wordsNoSpaces = removeWhitepaces(nameArray);
+  let wordCount = wordsNoSpaces.length;
+  let honorific = findHonorific(wordsNoSpaces, wordCount);
+  let lastName = findLastName(wordsNoSpaces);
+  
+  // If only one name present
+  if (wordCount === 1) {
+    return singleName(wordsNoSpaces, honorific);
   }
 
-  // If honorific title is present, move to position [0] in wordsNoSpaces
-  if (honorific !== undefined) {
-    wordsNoSpaces = shiftHonrificToStart(
-        wordsNoSpaces,
-        honorific,
-        wordCount
-      );
+  if (!lastName && honorific) {
+    let returnName =  `${honorific} ${lastToFirst(wordsNoSpaces.slice(1))}`;
+    return returnName;
   }
   
-  // Return Last name, First name
+  // Return LAST name, FIRST name
   if (wordCount === 2) {
     // Return LAST name first and FIRST name last
     return lastToFirst(wordsNoSpaces);
   }
+  
 
 
-}
-console.log(nameInverter('Troy Dr.'));
+};
+
 module.exports = nameInverter;
