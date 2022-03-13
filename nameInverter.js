@@ -68,19 +68,20 @@ const nameInverter = function(name) {
     return singleName(wordsNoSpaces, honorific);
   }
 
+  // Return LAST name, FIRST name
+  if (wordCount === 2) {
+    if (honorific) {
+      return name;
+    }
+    // Return LAST name first and FIRST name last
+    return lastToFirst(wordsNoSpaces);
+  }
+
   if (!lastName && honorific) {
     let returnName =  `${honorific} ${lastToFirst(wordsNoSpaces.slice(1))}`;
     return returnName;
   }
   
-  // Return LAST name, FIRST name
-  if (wordCount === 2) {
-    // Return LAST name first and FIRST name last
-    return lastToFirst(wordsNoSpaces);
-  }
-  
-
-
 };
 
 module.exports = nameInverter;
