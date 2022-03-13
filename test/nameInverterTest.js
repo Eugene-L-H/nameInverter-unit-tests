@@ -52,17 +52,18 @@ describe('nameInverter', function() {
 
 describe('nameInverter', function() {
   it('return honorific first-name when passed honorific first-name', function() {
+    const inputName = 'Miss.';
+    const expectedOutput = ' ';
+    assert.equal(nameInverter(inputName), expectedOutput);
+  });
+});
+
+describe('nameInverter', function() {
+  it('return a honorific last-name, first-name when passed honorific first-name last-name', function() {
 
   });
   const inverter = nameInverter(inputName);
 });
-
-// describe('nameInverter', function() {
-//   it('return a honorific last-name, first-name when passed honorific first-name last-name', function() {
-
-//   });
-//   const inverter = nameInverter(inputName);
-// });
 
 // describe('nameInverter', function() {
 //   it('return a honorific last-name, first-name when passed honorific first-name last-name with extra spaces around the words', function() {

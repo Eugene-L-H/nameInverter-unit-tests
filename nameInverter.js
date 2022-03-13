@@ -14,22 +14,6 @@ const nameInverter = (name) => {
     }
   }
 
-  // Move honorific title to position [0] in wordsNoSpaces
-  const wordsNoSpacesLength = wordsNoSpaces.length;
-  for (let i = 0; i < wordsNoSpacesLength; i++) {
-    const tempArr = [];
-    let currentWord = wordsNoSpaces[i];
-    // console.log('index currentWord:', currentWord[currentWord.length -1]);
-    if (currentWord[currentWord.length - 1] === '.') {
-      tempArr.push(currentWord);
-      console.log('equalled === ".": Pushing');
-      const indexToRemove = i;
-    }
-  }
-  wordsNoSpaces.splice(indexToRemove, 1);
-  wordsNoSpaces.unshift(tempArr[0]);
-  console.log('wordsNoSpaces after:', wordsNoSpaces);
-
   // If only one name present
   if (wordsNoSpaces.length === 1) {
     // Checks the last char for '.' If true that means name is an honorific
@@ -40,6 +24,20 @@ const nameInverter = (name) => {
     return wordsNoSpaces[0];
   }
 
+  // Move honorific title to position [0] in wordsNoSpaces
+  const wordsNoSpacesLength = wordsNoSpaces.length;
+  for (let i = 0; i < wordsNoSpacesLength; i++) {
+    let currentWord = wordsNoSpaces[i];
+    // console.log('index currentWord:', currentWord[currentWord.length -1]);
+    if (currentWord[currentWord.length - 1] === '.') {
+      const honorific = []; 
+      const tempArr = wordsNoSpaces;
+      honorific.push(currentWord);
+      tempArr.splice(i, 1);
+      tempArr.unshift(honorific[0]);
+      return wordsNoSpaces.join(' ');
+    }
+  }
 
   // Return Last name, First name
   if (wordsNoSpaces.length === 2) {
@@ -49,5 +47,5 @@ const nameInverter = (name) => {
 
 
 }
-console.log(nameInverter('Troy Dr. Pit'));
+console.log(nameInverter('Troy Dr.'));
 module.exports = nameInverter;
