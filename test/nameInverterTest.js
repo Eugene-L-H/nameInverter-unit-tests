@@ -58,12 +58,13 @@ describe('nameInverter', function() {
   });
 });
 
-describe('nameInverter', function() {
-  it('return a honorific last-name, first-name when passed honorific first-name last-name', function() {
-
-  });
-  const inverter = nameInverter(inputName);
-});
+// describe('nameInverter', function() {
+//   it('return a honorific last-name, first-name when passed honorific first-name last-name', function() {
+//     const inputName = 'Dr. Troy Pit';
+//     const expectedOutput = 'Dr. Pit, Troy';
+//     assert.equal(nameInverter(inputName), expectedOutput);
+//   });
+// });
 
 // describe('nameInverter', function() {
 //   it('return a honorific last-name, first-name when passed honorific first-name last-name with extra spaces around the words', function() {
