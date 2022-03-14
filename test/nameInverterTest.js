@@ -67,6 +67,14 @@ describe('nameInverter', function() {
 });
 
 describe('nameInverter', function() {
+  it('return a honorific last-name, first-name when passed honorific first-name last-name with extra spaces around the words', function() {
+    const inputName = '  Dr. Troy Pit  ';
+    const expectedOutput = 'Dr. Pit, Troy';
+    assert.equal(nameInverter(inputName), expectedOutput);
+  });
+});
+
+describe('nameInverter', function() {
   it('throw an error when name is undefined', function() {
     const inputName = undefined;
     const expectedOutput = "throw 'Error'";
